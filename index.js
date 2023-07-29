@@ -75,6 +75,13 @@ app.post("/text-to-speech", async (req, res) => {
     return res.status(400).json({ error: "Text is required." });
   }
 
+  // Check if the text length is greater than 200 characters
+  if (text.length > 200) {
+    return res
+      .status(400)
+      .json({ error: "Text must not exceed 200 characters." });
+  }
+
   const options = {
     lang: lang || "en",
     slow: speed === "slow",
